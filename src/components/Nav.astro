@@ -1,100 +1,22 @@
 ---
-const navLinks = [
-  { href: '/the-work', label: 'The Work' },
-  { href: '/speaking', label: 'Speaking' },
-  { href: '/perspective-engine', label: 'Perspective Engine' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+// Stripped top bar. Active link computed from the current path.
+// Minimal by design — Deep North (home), Speaking, About.
+// The Work, Perspective Engine and Contact are reached from the
+// home index. If you'd rather they sit in the bar too, add them
+// to the `links` array below.
+const path = (Astro.url.pathname.replace(/\/+$/, "") || "/");
+const links = [
+  { href: "/speaking", label: "Speaking" },
+  { href: "/about", label: "About" },
 ];
-
-const currentPath = Astro.url.pathname;
 ---
-
-<header style="border-bottom: 1px solid #D4CFC5; background-color: #FAFAF7;">
-  <div style="max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 4rem;">
-
-    <!-- Logo / Home link -->
-    <a href="/" style="font-family: 'Source Serif 4', Georgia, serif; font-size: 1.15rem; font-weight: 600; color: #1A1A1A; text-decoration: none; letter-spacing: -0.01em;">
-      Deep North
-    </a>
-
-    <!-- Desktop nav -->
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <ul style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
-        {navLinks.map(link => (
-          <li>
-            <a
-              href={link.href}
-              style={`font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; font-weight: 500; text-decoration: none; color: ${currentPath.startsWith(link.href) ? '#2A7F6F' : '#1A1A1A'}; transition: color 0.2s ease;`}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-
-    <!-- Mobile hamburger -->
-    <button
-      id="menu-toggle"
-      class="mobile-menu-btn"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-      style="display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; color: #1A1A1A;"
-    >
-      <svg id="icon-open" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect y="4" width="22" height="1.5" rx="0.75" fill="currentColor"/>
-        <rect y="10.25" width="22" height="1.5" rx="0.75" fill="currentColor"/>
-        <rect y="16.5" width="22" height="1.5" rx="0.75" fill="currentColor"/>
-      </svg>
-      <svg id="icon-close" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <line x1="3" y1="3" x2="19" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="19" y1="3" x2="3" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
-  </div>
-
-  <!-- Mobile menu -->
-  <div id="mobile-menu" style="display: none; border-top: 1px solid #D4CFC5; background-color: #FAFAF7;">
-    <nav aria-label="Mobile navigation">
-      <ul style="list-style: none; margin: 0; padding: 1rem 1.5rem;">
-        {navLinks.map(link => (
-          <li style="padding: 0.65rem 0; border-bottom: 1px solid #F0EDE6;">
-            <a
-              href={link.href}
-              style={`font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; font-weight: 500; text-decoration: none; color: ${currentPath.startsWith(link.href) ? '#2A7F6F' : '#1A1A1A'};`}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+<header class="site-nav">
+  <div class="nav-bar">
+    <a href="/" class="mark">Deep North</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      {links.map((l) => (
+        <a href={l.href} class={path === l.href ? "active" : ""}>{l.label}</a>
+      ))}
     </nav>
   </div>
 </header>
-
-<style>
-  @media (max-width: 720px) {
-    .desktop-nav {
-      display: none !important;
-    }
-    .mobile-menu-btn {
-      display: flex !important;
-    }
-  }
-</style>
-
-<script>
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
-
-  toggle?.addEventListener('click', () => {
-    const isOpen = menu?.style.display === 'block';
-    if (menu) menu.style.display = isOpen ? 'none' : 'block';
-    if (iconOpen) iconOpen.style.display = isOpen ? 'block' : 'none';
-    if (iconClose) iconClose.style.display = isOpen ? 'none' : 'block';
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-  });
-</script>
