@@ -221,7 +221,7 @@ export default function PerspectiveEngine() {
                 Subscribe on Substack
               </a>
               <a
-                href="/contact"
+                href="/the-work"
                 style={{ backgroundColor: 'transparent', color: '#2A7F6F', padding: '0.68rem 1.48rem', borderRadius: '3px', fontSize: '0.88rem', fontFamily: "'Inter', system-ui, sans-serif", fontWeight: 500, textDecoration: 'none', border: '1.5px solid #2A7F6F', display: 'inline-block' }}
               >
                 Get in touch

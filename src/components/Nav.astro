@@ -1,13 +1,11 @@
 ---
 // Stripped top bar. Active link computed from the current path.
-// Minimal by design — Deep North (home), Speaking, About.
-// The Work, Perspective Engine and Contact are reached from the
-// home index. If you'd rather they sit in the bar too, add them
-// to the `links` array below.
+// Three pages only: home, The Work, The Perspective Engine.
+// About, Speaking and Contact were folded into The Work.
 const path = (Astro.url.pathname.replace(/\/+$/, "") || "/");
 const links = [
-  { href: "/speaking", label: "Speaking" },
-  { href: "/about", label: "About" },
+  { href: "/the-work", label: "The Work" },
+  { href: "/perspective-engine", label: "Perspective Engine" },
 ];
 ---
 <header class="site-nav">
