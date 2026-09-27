@@ -1,0 +1,140 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Cognitive Unease"
+  description="Cognitive Unease: What Lies Beneath the Way We Think, Work and Live, by Ken S Davidson. The first book in the trilogy. Coming November 2026."
+>
+  <div class="wrap page">
+    <p class="eyebrow">The Book</p>
+
+    <div class="hero">
+      <div>
+        <h2>Cognitive Unease</h2>
+        <p class="sub">What Lies Beneath the Way We Think, Work and Live</p>
+        <p class="sub">Ken S Davidson<br /><span class="faint">Coming November 2026</span></p>
+      </div>
+      <!-- After the cover reveal: put cover.png in public/books, then replace this div with
+      <img class="cover-img" src="/books/cover.png" alt="Cover of Cognitive Unease by Ken S Davidson" width="599" height="944" />
+      -->
+      <div class="cover" role="img" aria-label="Cover to be revealed">
+        <span>Cognitive<br />Unease</span>
+        <span class="faint">Ken S Davidson</span>
+      </div>
+    </div>
+
+    <p class="lede tagline">Why the mind that shaped our world now limits us.</p>
+
+    <!-- At launch: point this at the purchase page and change the label to "Buy the book" -->
+    <a class="btn-outline" href="#notify">Tell me when it's out</a>
+
+    <hr class="rule" />
+
+    <p class="block-label">The unease</p>
+
+    <div class="body-prose">
+      <p class="lede">Most people carry a low-grade unease they can't account for. It doesn't come from anything in particular, and it doesn't lift when things go well. We treat it as stress, or personality, or the cost of a busy life.</p>
+      <p class="lede">This book reads it as information. The unease is the sound of an intelligence that began installing in us and stopped part way. What we run on instead is a mind built to sort, decide and hold the line, which is superb on problems with one right answer and unable to hold the ones that matter most.</p>
+    </div>
+
+    <div class="stack">
+      <details>
+        <summary><span>About the book</span><span class="plus"></span></summary>
+        <div class="body">
+          <p class="sub"><em>Cognitive Unease</em> is the first book in the trilogy, and it lays the foundations. It describes the cognitive system we default to, why it produces the particular flavour of disquiet so many people recognise, and how that system shapes everything from a stuck decision to a culture that keeps failing in the same way.</p>
+          <p class="sub">It draws on two decades of running processes with groups, in corporate, community and institutional settings, where people reliably reach a quality of thinking the default system can't produce. That access is real, and it's structural. This book is an account of the structure.</p>
+          <p class="sub">It offers no techniques. The unease has been managed and medicated and motivated away for long enough. Naming what it is comes first.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span>What you'll find</span><span class="plus"></span></summary>
+        <div class="body">
+          <ul class="list">
+            <li>An account of the mind that built the modern world, and the problems it can no longer hold.</li>
+            <li>Why anxiety at this scale is a signal rather than a fault.</li>
+            <li>How binary sorting shows up in meetings, decisions, relationships and whole organisations.</li>
+            <li>What becomes available once you can see the system you're running on.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary><span>The trilogy</span><span class="plus"></span></summary>
+        <div class="body">
+          <p class="sub"><em>Cognitive Unease</em> is the first of three, followed by <em>Relational Intelligence</em> and <em>Only Human</em>. Book two takes up the capacity we reach for and rarely name. Book three asks what it means to live this, together.</p>
+        </div>
+      </details>
+    </div>
+
+    <hr class="rule" />
+
+    <p class="block-label" id="notify">Notify me</p>
+    <p class="sub">The book is released in November 2026. Leave your email and I'll tell you when it's available, and nothing else.</p>
+    <iframe class="signup" src="https://kensdavidson.substack.com/embed" title="Subscribe for release news" frameborder="0" scrolling="no" loading="lazy"></iframe>
+
+    <hr class="rule" />
+
+    <p class="block-label">The author</p>
+    <img class="portrait" src="/books/ken.jpg" alt="Ken S Davidson" width="160" height="160" />
+    <div class="body-prose">
+      <p class="sub">Ken S Davidson is the founder of Deep North, based in Far North Queensland. He has spent two decades working with leaders, teams and organisations.</p>
+      <p class="sub"><a class="arrow-link" href="/the-work">More about the work →</a></p>
+    </div>
+
+    <hr class="rule" />
+
+    <p class="block-label">Notice it</p>
+    <p class="sub">Rather notice the pattern than read about it? The Perspective Engine takes about three minutes.</p>
+    <p class="sub"><a class="arrow-link" href="/perspective-engine">Try the Perspective Engine →</a></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 2.5rem;
+  }
+  .hero h2 { margin-bottom: 1rem; }
+  .faint { color: var(--faint); }
+
+  .cover {
+    aspect-ratio: 2 / 3;
+    border: 1px solid var(--ink);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  .cover .faint { font-size: 0.75rem; }
+  .cover-img { width: 100%; }
+
+  .tagline { font-size: 1.125rem; line-height: 1.5; margin-bottom: 2rem; }
+
+  .stack { margin-top: 2.5rem; }
+  .stack details:last-of-type { border-bottom: 1px solid var(--rule); }
+
+  .signup {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    height: 150px;
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+
+  .portrait {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    margin: 0 0 1.5rem;
+  }
+
+  @media (max-width: 560px) {
+    .hero { grid-template-columns: 1fr; }
+    .cover { max-width: 180px; }
+  }
+</style>

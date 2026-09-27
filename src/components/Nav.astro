@@ -1,9 +1,10 @@
 ---
 // Stripped top bar. Active link computed from the current path.
-// Three pages only: home, The Work, The Perspective Engine.
+// Pages: home, The Book, The Work, The Perspective Engine.
 // About, Speaking and Contact were folded into The Work.
 const path = (Astro.url.pathname.replace(/\/+$/, "") || "/");
 const links = [
+  { href: "/books", label: "The Book" },
   { href: "/the-work", label: "The Work" },
   { href: "/perspective-engine", label: "Perspective Engine" },
 ];
@@ -18,3 +19,9 @@ const links = [
     </nav>
   </div>
 </header>
+
+<style>
+  /* Four items no longer fit on one line on a phone: let the links drop under the mark */
+  .nav-bar { flex-wrap: wrap; row-gap: 0.5rem; }
+  .nav-links { flex-wrap: wrap; row-gap: 0.25rem; }
+</style>

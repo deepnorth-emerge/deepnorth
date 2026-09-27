@@ -1,0 +1,352 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Perspective Engine"
+  description="One dilemma, one choice, about three minutes. Catch the mind sorting, then try holding both sides instead."
+>
+  <div class="wrap page pe">
+    <p class="eyebrow">Perspective Engine</p>
+
+    <div class="track" aria-hidden="true" id="track">
+      <span>Catch</span>
+      <span>Turn</span>
+      <span>Hold</span>
+      <span>Door</span>
+    </div>
+
+    <div aria-live="polite">
+
+      <!-- Start -->
+      <section class="stage" id="s-start">
+        <h2>Catch the mind sorting.</h2>
+        <p class="lede" id="start-lead">You'll be given a dilemma and asked to choose. Then we'll look at what happened while you chose.</p>
+        <p class="sub">About three minutes. Nothing is scored, sent or saved.</p>
+        <button class="btn-outline" id="begin">Begin</button>
+      </section>
+
+      <!-- Catch -->
+      <section class="stage" id="s-catch" hidden>
+        <h2 id="d-title"></h2>
+        <p class="lede scenario" id="d-text"></p>
+        <p class="sub">Which way would you go?</p>
+        <div class="choices" id="choices"></div>
+        <p class="sub faint">Go with your first answer.</p>
+      </section>
+
+      <!-- How it felt -->
+      <section class="stage" id="s-felt" hidden>
+        <h2>You chose <span id="chosen-label"></span>.</h2>
+        <p class="lede" id="pace"></p>
+        <p class="sub">What was there in the moment you chose?</p>
+        <div class="feelings" id="feelings">
+          <button class="pill" data-f="relief">Relief</button>
+          <button class="pill" data-f="certainty">Certainty</button>
+          <button class="pill" data-f="unease">Some unease</button>
+          <button class="pill" data-f="irritation">Irritation at being asked</button>
+        </div>
+      </section>
+
+      <!-- Turn -->
+      <section class="stage" id="s-turn" hidden>
+        <h2>The other answer was also true.</h2>
+        <div class="other-side">
+          <p class="other-label" id="other-label"></p>
+          <p class="sub" id="other-case"></p>
+        </div>
+        <p class="lede">So was yours. This was never the kind of question that has an answer. It has two things that are both right, pulling against each other, and people you care about on each side.</p>
+        <p class="sub">Here's what happened in the few seconds you spent on it.</p>
+        <ul class="list named">
+          <li><strong>The sort.</strong> A live situation with people in it became two folders, and you picked one. The page offered two buttons, which helped, but most rooms offer two buttons too.</li>
+          <li><strong>The close.</strong> <span id="felt-line"></span></li>
+          <li><strong>The unease underneath.</strong> Open questions register as threat. Choosing is the fastest way to make the alarm go quiet, whether or not the choice is any good.</li>
+        </ul>
+        <p class="lede">None of this is a mistake. It's the mind most of us run on, doing what it was built to do. The question is whether it's the only thing available.</p>
+        <button class="btn-outline" id="to-hold">Try the other thing</button>
+      </section>
+
+      <!-- Hold -->
+      <section class="stage" id="s-hold" hidden>
+        <h2>Same dilemma. This time you don't choose.</h2>
+        <p class="sub">Keep both on the screen. Stay with them until the line reaches the edge.</p>
+        <div class="both">
+          <div id="hold-a"></div>
+          <div id="hold-b"></div>
+        </div>
+        <div class="holdline" id="holdline"><i></i></div>
+        <p class="lede prompt" id="prompt"></p>
+        <div id="after-hold" hidden>
+          <p class="sub">What do you notice now that you didn't when you were choosing?</p>
+          <label for="notice" class="sub faint">Write if it helps. It stays on this page.</label>
+          <textarea id="notice"></textarea>
+          <button class="btn-outline" id="to-door">Continue</button>
+        </div>
+      </section>
+
+      <!-- Door -->
+      <section class="stage" id="s-door" hidden>
+        <h2>That was holding.</h2>
+        <p class="lede">It's slower than choosing and less comfortable. It also lets in what the sort throws away: the other side's reasons, the people in the middle, the parts nobody knows yet. Most people find more there than they expected, including options that weren't on either button.</p>
+        <p class="lede">We aren't short of intelligence. We're short of the capacity to hold what our intelligence keeps sorting. That gap, and the low hum of unease it leaves in so many of us, is what <em>Cognitive Unease</em> is about.</p>
+        <div class="actions">
+          <a class="btn-outline" href="/books">About the book</a>
+          <button class="text-button" id="another">Try another dilemma</button>
+        </div>
+
+        <hr class="rule" />
+
+        <p class="block-label">Try it with someone</p>
+        <p class="sub">Send this dilemma to someone who'd probably choose the other way. When you talk about it, compare what you noticed rather than what you chose.</p>
+        <button class="btn-outline" id="share">Send this dilemma</button>
+        <p class="sub faint toast" id="toast" role="status"></p>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .pe .faint { color: var(--faint); }
+  .pe .stage[hidden] { display: none; }
+
+  .pe .track { display: grid; grid-template-columns: repeat(4, 1fr); margin-bottom: 3rem; }
+  .pe .track span {
+    padding-top: 0.6rem; border-top: 1px solid var(--rule);
+    font-size: 0.6875rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
+  }
+  .pe .track span.on { border-top: 2px solid var(--ink); color: var(--ink); }
+  .pe .track span.done { border-top-color: var(--ink); }
+
+  .pe button { font-family: var(--mono); cursor: pointer; background: none; }
+  .pe .btn-outline { background: none; }
+
+  .pe .scenario { border-left: 1px solid var(--ink); padding-left: 1rem; margin-bottom: 2rem; }
+
+  .pe .choices { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--ink); margin-bottom: 1rem; }
+  .pe .choices button + button { border-left: 1px solid var(--ink); }
+  .pe .choice {
+    border: 0; padding: 1.5rem 1rem; text-align: left;
+    font-size: 0.9375rem; line-height: 1.5; color: var(--ink);
+    transition: background-color .15s, color .15s;
+  }
+  .pe .choice:hover { background: var(--ink); color: var(--paper); }
+
+  .pe .feelings { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .pe .pill {
+    border: 1px solid var(--ink); padding: 0.5rem 0.9rem; color: var(--ink);
+    font-size: 0.8125rem; transition: background-color .15s, color .15s;
+  }
+  .pe .pill:hover, .pe .pill[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+  .pe .other-side { border: 1px solid var(--rule); padding: 1.25rem; margin-bottom: 2rem; }
+  .pe .other-label { font-weight: 600; margin-bottom: 0.5rem; }
+  .pe .other-side p:last-child { margin-bottom: 0; }
+
+  .pe .named { margin-bottom: 2rem; }
+
+  .pe .both { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--ink); margin-bottom: 2rem; }
+  .pe .both div { padding: 1.25rem 1rem; }
+  .pe .both div + div { border-left: 1px solid var(--ink); }
+
+  .pe .holdline { position: relative; height: 1px; background: var(--rule); margin: 0 0 1.25rem; overflow: hidden; }
+  .pe .holdline i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--ink); }
+  .pe .holdline.run i { width: 100%; transition: width 30s linear !important; }
+  .pe .prompt { min-height: 5.25em; transition: opacity .6s; }
+  .pe .prompt.fade { opacity: 0; }
+
+  .pe textarea {
+    display: block; width: 100%; max-width: 58ch; min-height: 120px; margin: 0.5rem 0 1.5rem;
+    font: inherit; color: var(--ink); background: transparent;
+    border: 1px solid var(--rule); padding: 0.75rem; resize: vertical;
+  }
+  .pe textarea:focus { outline: none; border-color: var(--ink); }
+
+  .pe .actions { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: center; }
+  .pe .text-button {
+    border: 0; padding: 0; font-size: 0.875rem; color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  .pe .text-button:hover { border-color: var(--ink); }
+  .pe .toast { margin-top: 1rem; min-height: 1.75em; }
+
+  .pe :focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+
+  @media (max-width: 560px) {
+    .pe .choices, .pe .both { grid-template-columns: 1fr; }
+    .pe .choices button + button { border-left: 0; border-top: 1px solid var(--ink); }
+    .pe .both div + div { border-left: 0; border-top: 1px solid var(--ink); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pe .prompt { transition: none; }
+  }
+</style>
+
+<script is:inline>
+(function () {
+/* Dilemmas. Each option carries the strongest case for itself, shown to people who chose the other one.
+   To add one: copy a block, give it a new id (used in shared links), keep both cases equally strong. */
+const DILEMMAS = [
+  {
+    id: "restructure",
+    title: "The restructure",
+    text: "Your leadership team is split. Half want to announce the restructure this month, because rumours are already doing damage and good people are leaving. The other half want to wait a quarter, because the design isn't finished and a rushed announcement will cost trust you won't get back.",
+    a: { label: "Announce now", case: "People already know something is coming. Silence is being filled with the worst version of the story, and the ones leaving are the ones with options. An imperfect announcement treats staff as adults who can handle an unfinished plan." },
+    b: { label: "Wait a quarter", case: "You get one announcement. If the design changes after people hear it, every later message is discounted. Waiting until you can answer the obvious questions protects the trust the whole change depends on." }
+  },
+  {
+    id: "mum",
+    title: "Mum",
+    text: "Your mother is eighty-four and has fallen twice this year. Your brother wants her in care, where someone will be there if it happens again. She wants to stay in the house she has lived in for fifty years, and says so every time it comes up.",
+    a: { label: "Move her into care", case: "The next fall could be the one she doesn't get up from, alone on the kitchen floor overnight. Keeping her safe is what loving her looks like now, even if she can't see it yet." },
+    b: { label: "Keep her at home", case: "It's her life, and she's told you clearly how she wants to live the rest of it. A safer life she didn't choose, away from everything that makes her who she is, is its own kind of harm." }
+  },
+  {
+    id: "performer",
+    title: "The high performer",
+    text: "Your best salesperson brings in a third of the team's revenue and is hard on the people around them. Two juniors have asked to move teams this month. Your manager has made it clear the numbers matter this year.",
+    a: { label: "Put the behaviour on the line", case: "Everyone is watching what you tolerate. If results buy an exemption, the juniors will leave, the next ones will too, and the team will learn what actually counts here." },
+    b: { label: "Keep them and work around it", case: "A third of the revenue pays for the jobs of the people who are upset. Losing it could put the whole team at risk. Shield the juniors, coach where you can, and don't break what works." }
+  },
+  {
+    id: "resort",
+    title: "The resort",
+    text: "A resort is proposed on the headland outside your coastal town. It would bring several hundred jobs to a place where young people leave to find work. It would also change a stretch of coast that families have walked and fished for generations.",
+    a: { label: "Support it", case: "Towns that can't keep their young people slowly empty out. Jobs let families stay together and keep the school, the clinic and the footy club alive. A living town can look after its coast." },
+    b: { label: "Oppose it", case: "Some places can't be got back once they're built on. The headland belongs to people who aren't born yet as much as to anyone at the council meeting, and there will be other ways to bring work in." }
+  }
+];
+
+const FELT = {
+  relief: "You felt relief. That's the tell. Something open got closed, and the mind you run on rewards closure regardless of what gets lost in it.",
+  certainty: "You felt certain. Certainty arrived quickly and felt like clarity, but it came from making half the picture go away.",
+  unease: "You felt some unease and chose anyway. That's the pattern exactly: the unease was information, and choosing was a way to make it stop.",
+  irritation: "You felt irritated at being asked. That's common with questions that have no answer. The alarm treats an open question as something to get rid of."
+};
+
+const PROMPTS = [
+  "What does the side you didn't choose know that you don't?",
+  "Who else is in this, and what are they afraid of?",
+  "What would have to be true for both to be right?",
+  "What might become possible if nobody had to win?"
+];
+
+const $ = id => document.getElementById(id);
+const stages = ["start", "catch", "felt", "turn", "hold", "door"];
+const trackIndex = { catch: 0, felt: 0, turn: 1, hold: 2, door: 3 };
+
+let current = null, chosen = null, shownAt = 0, promptTimer = null, holdTimer = null;
+
+function show(name) {
+  stages.forEach(s => { $("s-" + s).hidden = s !== name; });
+  const idx = name in trackIndex ? trackIndex[name] : -1;
+  document.querySelectorAll("#track span").forEach((el, i) => {
+    el.classList.toggle("on", i === idx);
+    el.classList.toggle("done", idx > -1 && i < idx);
+  });
+  window.scrollTo({ top: 0 });
+  const h = $("s-" + name).querySelector("h2");
+  if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+}
+
+function pick(excludeId) {
+  const pool = DILEMMAS.filter(d => d.id !== excludeId);
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function startCatch(d) {
+  current = d;
+  $("d-title").textContent = d.title;
+  $("d-text").textContent = d.text;
+  const box = $("choices");
+  box.innerHTML = "";
+  ["a", "b"].forEach(k => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.textContent = d[k].label;
+    btn.addEventListener("click", () => choose(k));
+    box.appendChild(btn);
+  });
+  document.querySelectorAll("#feelings .pill").forEach(p => p.setAttribute("aria-pressed", "false"));
+  $("notice").value = "";
+  $("toast").textContent = "";
+  show("catch");
+  shownAt = Date.now();
+}
+
+function choose(k) {
+  chosen = k;
+  const secs = (Date.now() - shownAt) / 1000;
+  $("chosen-label").textContent = current[k].label.charAt(0).toLowerCase() + current[k].label.slice(1);
+  $("pace").textContent =
+    secs < 8 ? "You got there quickly. Most people do." :
+    secs < 25 ? "You took a moment, then you got there." :
+    "You took your time. Even so, you chose, because the page asked you to.";
+  show("felt");
+}
+
+document.querySelectorAll("#feelings .pill").forEach(p => {
+  p.addEventListener("click", () => {
+    p.setAttribute("aria-pressed", "true");
+    const other = chosen === "a" ? "b" : "a";
+    $("other-label").textContent = current[other].label;
+    $("other-case").textContent = current[other].case;
+    $("felt-line").textContent = FELT[p.dataset.f];
+    setTimeout(() => show("turn"), 250);
+  });
+});
+
+function startHold() {
+  $("hold-a").textContent = current.a.label;
+  $("hold-b").textContent = current.b.label;
+  $("after-hold").hidden = true;
+  const line = $("holdline");
+  line.classList.remove("run");
+  void line.offsetWidth;
+  show("hold");
+
+  let i = 0;
+  const prompt = $("prompt");
+  prompt.textContent = PROMPTS[0];
+  clearInterval(promptTimer); clearTimeout(holdTimer);
+  requestAnimationFrame(() => line.classList.add("run"));
+  promptTimer = setInterval(() => {
+    i++;
+    if (i >= PROMPTS.length) { clearInterval(promptTimer); return; }
+    prompt.classList.add("fade");
+    setTimeout(() => { prompt.textContent = PROMPTS[i]; prompt.classList.remove("fade"); }, 600);
+  }, 7500);
+  holdTimer = setTimeout(() => {
+    $("after-hold").hidden = false;
+    $("notice").focus({ preventScroll: true });
+  }, 30000);
+}
+
+async function share() {
+  const url = location.origin + location.pathname.replace(/\/+$/, "") + "?d=" + current.id;
+  const text = "A dilemma for you: " + current.title + ". Takes three minutes. I'd like to hear what you notice.";
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: "The Perspective Engine", text, url });
+      return;
+    }
+    await navigator.clipboard.writeText(text + " " + url);
+    $("toast").textContent = "Link copied. Paste it into a message.";
+  } catch (e) {
+    if (e && e.name === "AbortError") return;
+    $("toast").textContent = "Copy this link: " + url;
+  }
+}
+
+const want = new URLSearchParams(location.search).get("d");
+const shared = DILEMMAS.find(d => d.id === want);
+if (shared) {
+  $("start-lead").textContent = "Someone sent you a dilemma: " + shared.title.toLowerCase() + ". You'll be asked to choose. Then we'll look at what happened while you chose.";
+}
+
+$("begin").addEventListener("click", () => startCatch(shared || pick()));
+$("to-hold").addEventListener("click", startHold);
+$("to-door").addEventListener("click", () => show("door"));
+$("another").addEventListener("click", () => startCatch(pick(current.id)));
+$("share").addEventListener("click", share);
+})();
+</script>

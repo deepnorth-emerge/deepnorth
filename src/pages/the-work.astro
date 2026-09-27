@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 <BaseLayout
-  title="The Work | Deep North"
+  title="The Work"
   description="Beyond Binary — the framework, the books, and working with organisations. Ken S Davidson on the cognitive structure underneath how we think, decide, and relate."
 >
   <div class="wrap page">
@@ -34,6 +34,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <p class="block-label">Who's behind it</p>
 
+    <img class="portrait" src="/books/ken.jpg" alt="Ken S Davidson" width="160" height="160" />
+
     <div class="body-prose">
       <p>My name is Ken S Davidson. I live in Far North Queensland, a beautiful place that lends itself to a different perspective.</p>
 
@@ -43,7 +45,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <details>
       <summary><span>The books</span><span class="plus"></span></summary>
       <div class="body">
-        <p class="sub">Author of the Beyond Binary trilogy: <em>Cognitive Unease</em>, <em>Relational Intelligence</em>, and <em>Only Human</em>. The current book, <em>Unfinished</em>, reads our baseline anxiety as a structural signal from an interrupted cognitive installation — and asks what becomes possible when we recognise it.</p>
+        <p class="sub">The first book, <em>Cognitive Unease: What Lies Beneath the Way We Think, Work and Live</em>, comes out in November 2026. It reads the low-grade unease so many of us carry as a signal from an intelligence that began installing in us and stopped part way, and asks what becomes possible once we recognise it. <em>Relational Intelligence</em> and <em>Only Human</em> complete the trilogy.</p>
+        <p class="sub"><a href="/books">About the book →</a></p>
       </div>
     </details>
 
@@ -58,7 +61,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <ul class="list">
       <li><strong>Beyond Binary.</strong> The cognitive operating system hiding inside every organisational challenge.</li>
       <li><strong>Relational Intelligence and AI.</strong> Why the next chapter of artificial intelligence depends on a human upgrade.</li>
-      <li><strong>Unfinished.</strong> What our baseline anxiety is actually telling us.</li>
+      <li><strong>Cognitive Unease.</strong> What our baseline anxiety is actually telling us.</li>
     </ul>
 
     <p class="block-label">Consulting</p>
@@ -96,3 +99,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  .portrait {
+    display: block;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    margin: 0 0 24px;
+  }
+</style>
