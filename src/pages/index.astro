@@ -3,45 +3,48 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 <BaseLayout
   title="Ken S Davidson"
-  description="Transformation can't run on the logic it's meant to replace. Deep North works with leaders and organisations on the human work change now asks of us."
+  description="Transformation can't run on the logic it's meant to replace. Deep North works with leaders on the human work that logic can't reach."
 >
   <div class="wrap page">
     <p class="eyebrow">Deep North — Ken S Davidson</p>
     <h1 class="thesis home-thesis">Transformation can't run on the logic it's meant to replace.</h1>
 
-    <p class="lede">Organisations are between worlds. The old certainties have gone and the new ones haven't arrived. Restructures follow restructures, AI is taking over work that used to define expertise, and trust wears thinner with each announcement. Everyone is talking about transformation.</p>
+    <p class="lede home-lede">Everyone is talking about transformation, and most of it is run with the same logic that keeps things as they are. Deep North works with leaders on the human work that logic can't reach.</p>
 
-    <p class="lede">Then watch how it gets done. A roadmap, a timeline, a change curve, a refreshed set of values. Urgency to decide, pressure to show progress, questions closed before anyone has understood them. These are the tools of control, and they are very good at keeping things as they are.</p>
+    <details>
+      <summary><span>Between worlds</span><span class="plus"></span></summary>
+      <div class="body">
+        <p class="sub">Organisations are between worlds. The old certainties have gone and the new ones haven't arrived. Restructures follow restructures, AI is taking over work that used to define expertise, and trust wears thinner with each announcement.</p>
+        <p class="sub">Then watch how transformation gets done. A roadmap, a timeline, a change curve, a refreshed set of values. Urgency to decide, pressure to show progress, questions closed before anyone has understood them. These are the tools of control, and they are very good at keeping things as they are.</p>
+      </div>
+    </details>
 
-    <hr class="rule" />
+    <details>
+      <summary><span>The default</span><span class="plus"></span></summary>
+      <div class="body">
+        <p class="sub">Under uncertainty, people sort. Right or wrong, win or lose, fix it now. It's the oldest thinking we have, and over generations organisations have built it into how they run.</p>
+        <p class="sub">It works well on problems that have answers. The problems that matter most right now have no answer waiting to be found: trust, culture, meaning, what the future asks of us. Pointing the default at them produces more of the same, faster.</p>
+      </div>
+    </details>
 
-    <h2 class="block-label">The default</h2>
+    <details>
+      <summary><span>Solving and holding</span><span class="plus"></span></summary>
+      <div class="body">
+        <p class="sub">Deep North works with leaders and organisations to see that default as it happens, and to separate what needs solving from what needs holding.</p>
+        <p class="sub">Holding is active work. It means staying present to the tension and discomfort of an open question without grabbing the nearest answer, reading what's moving between people before it has words, and keeping the question open long enough for the group to see what no individual in it could see alone. Leaders keep acting on what can be acted on, and they stop forcing closure on what can't.</p>
+        <p class="sub">This is how you reach the collective potential you know is in your organisation. You've glimpsed it in a meeting that suddenly came alive, or in a team that found an answer nobody walked in with. Every organisation has an intelligence of its own, and most of the time the default keeps it buried. Holding is how it surfaces, and with practice, how it becomes the way your organisation works.</p>
+        <p class="sub"><a class="inline" href="/the-work">More on the work</a></p>
+      </div>
+    </details>
 
-    <p class="lede">Under uncertainty, people sort. Right or wrong, win or lose, fix it now. It's the oldest thinking we have, and over generations organisations have built it into how they run.</p>
-
-    <p class="lede">It works well on problems that have answers. The problems that matter most right now have no answer waiting to be found: trust, culture, meaning, what the future asks of us. Pointing the default at them produces more of the same, faster.</p>
-
-    <hr class="rule" />
-
-    <h2 class="block-label">A different kind of intervention</h2>
-
-    <p class="lede">Deep North works with leaders and organisations to see that default as it happens, and to separate what needs solving from what needs holding.</p>
-
-    <p class="lede">Holding is active work. It means staying present to the tension and discomfort of an open question without grabbing the nearest answer, reading what's moving between people before it has words, and keeping the question open long enough for the group to see what no individual in it could see alone. Leaders keep acting on what can be acted on, and they stop forcing closure on what can't.</p>
-
-    <p class="lede">This is how you reach the collective potential you know is in your organisation. You've glimpsed it in a meeting that suddenly came alive, or in a team that found an answer nobody walked in with. Every organisation has an intelligence of its own, and most of the time the default keeps it buried. Holding is how it surfaces, and with practice, how it becomes the way your organisation works.</p>
-
-    <p><a class="inline" href="/the-work">More on the work</a></p>
-
-    <hr class="rule" />
-
-    <h2 class="block-label">The human work</h2>
-
-    <p class="lede">Machines are getting very good at solving. Every year more of the work with clear answers moves to them, and that trend will only accelerate. What remains is the work only people can do: sensing what's happening between us, holding what can't yet be resolved, and finding a way forward together.</p>
-
-    <p class="lede">These are human technologies. They can be understood, practised and deliberately developed, in individuals and in whole organisations. I believe developing them is the most important work in front of leaders right now, and that the organisations that take it seriously will be the ones still able to change when it counts.</p>
-
-    <p><a class="inline" href="/perspective-engine">Try the Perspective Engine</a></p>
+    <details>
+      <summary><span>The human work</span><span class="plus"></span></summary>
+      <div class="body">
+        <p class="sub">Machines are getting very good at solving. Every year more of the work with clear answers moves to them, and that trend will only accelerate. What remains is the work only people can do: sensing what's happening between us, holding what can't yet be resolved, and finding a way forward together.</p>
+        <p class="sub">These are human technologies. They can be understood, practised and deliberately developed, in individuals and in whole organisations. I believe developing them is the most important work in front of leaders right now, and that the organisations that take it seriously will be the ones still able to change when it counts.</p>
+        <p class="sub"><a class="inline" href="/perspective-engine">Try the Perspective Engine</a></p>
+      </div>
+    </details>
 
     <p class="coda">The emergency is the emergence.</p>
 
@@ -80,7 +83,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     line-height: 1.25;
     letter-spacing: -0.02em;
     max-width: 22ch;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .home-lede {
+    margin-bottom: 3rem;
   }
   .coda {
     font-size: clamp(1.75rem, 7vw, 2.75rem);
